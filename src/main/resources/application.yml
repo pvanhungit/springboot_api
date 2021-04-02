@@ -1,0 +1,89 @@
+#
+# Spring Framework properties.
+#
+# How to configure
+# https://docs.spring.io/spring-boot/docs/2.1.4.RELEASE/reference/htmlsingle/#common-application-properties
+#
+server:
+  port: 8080
+#  servlet:
+#    context-path: /resource-server-jwt
+spring:
+  profiles:
+    active: local
+  data:
+    rest:
+      basePath: /api
+  datasource:
+    url: jdbc:postgresql://localhost:55432/entropy
+    driver-class-name: org.postgresql.Driver
+    username: postgres
+    password: postgres
+    ## default connection pool
+    hikari:
+      connectionTimeout: 20000
+      maximumPoolSize: 5
+  #drop n create table again, good for testing, comment this in production
+  jpa:
+    hibernate:
+      ddl-auto: update
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.PostgreSQLDialect
+    show-sql: true
+  flyway:
+    enabled: true
+    user: postgres
+    password: postgres
+    url: jdbc:postgresql://localhost:55432/entropy
+    locations: classpath:/db/migration,/db/data/migration
+    baselineOnMigrate: true
+  thymeleaf:
+    cache: false
+    enabled: true
+    prefix: classpath:/templates/
+    suffix: .html
+  mail:
+    host: 127.0.0.1
+    port: 2025
+    username: support_daily@entropy.com
+    password:
+  security:
+    oauth2:
+      resourceserver:
+        jwt:
+          jwk-set-uri: http://localhost:8500/auth/realms/entropy-data/protocol/openid-connect/certs
+    allowed-origins:
+      - http://localhost:3500
+logging:
+  file: ./log/debug.log
+  pattern:
+    console: "%d %-5level %logger: %msg%n"
+    file: "%d %-5level [%thread] %logger: %msg%n"
+  level:
+    com.awesome.*: DEBUG
+springdoc:
+  api-docs:
+    groups:
+      enabled: true
+keycloak:
+  realm: entropy-data
+#  clientId
+  resource: wcLa0Z03Ur7RikCq6fhkr58QAZuCzXz1niQw-API
+#  base url
+  auth-server-url: http://localhost:8500/auth
+  ssl-required: external
+  public-client: true
+  principal-attribute: preferred_username
+  credentials:
+    secret: b19badfa-f2b8-440f-9d38-bc6786cbbf5e
+  use-resource-role-mappings: false
+  bearer-only: true
+#
+# doma-spring-boot properties.
+#
+# * How to configure
+# https://github.com/domaframework/doma-spring-boot/blob/master/README.md
+#
+doma:
+  dialect: postgres

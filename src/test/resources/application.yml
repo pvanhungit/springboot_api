@@ -1,0 +1,78 @@
+#
+# Spring Framework properties.
+#
+# How to configure
+# https://docs.spring.io/spring-boot/docs/2.1.4.RELEASE/reference/htmlsingle/#common-application-properties
+#
+server:
+  port: 8081
+spring:
+  profiles:
+    active: local
+  data:
+    rest:
+      basePath: /api
+  datasource:
+    url: jdbc:postgresql://localhost:55432/unittest
+    driver-class-name: org.postgresql.Driver
+    username: postgres
+    password: postgres
+    ## default connection pool
+    hikari:
+      connectionTimeout: 20000
+      maximumPoolSize: 5
+  #drop n create table again, good for testing, comment this in production
+  jpa:
+    hibernate:
+      ddl-auto: update
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.PostgreSQLDialect
+    show-sql: true
+  flyway:
+    enabled: true
+    user: postgres
+    password: postgres
+    url: jdbc:postgresql://localhost:55432/unittest
+    locations: classpath:/db/migration,/db/data/migration
+  thymeleaf:
+    cache: false
+    enabled: true
+    prefix: classpath:/templates/
+    suffix: .html
+  mail:
+    host: 127.0.0.1
+    port: 2025
+    username: support_daily@entropy.com
+    password:
+  mvc: static-path-pattern=/resources/static/**
+
+security:
+  oauth2:
+    resource:
+      id: http://localhost:8082
+      jwk:
+        keySetUri: https://trendy-vn.au.auth0.com/.well-known/jwks.json
+auth0:
+  domain: https://trendy-vn.au.auth0.com
+  clientId: ztFLx31swM8zrpYafRzu861LV1zOZqCs
+logging:
+  file: ./log/debug.log
+  pattern:
+    console: "%d %-5level %logger: %msg%n"
+    file: "%d %-5level [%thread] %logger: %msg%n"
+  level:
+    com.awesome.*: DEBUG
+springdoc:
+  api-docs:
+    groups:
+      enabled: true
+
+#
+# doma-spring-boot properties.
+#
+# * How to configure
+# https://github.com/domaframework/doma-spring-boot/blob/master/README.md
+#
+doma:
+  dialect: postgres

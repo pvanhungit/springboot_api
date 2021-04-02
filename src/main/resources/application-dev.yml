@@ -1,0 +1,40 @@
+#
+# Spring Framework properties.
+#
+# How to configure
+# https://docs.spring.io/spring-boot/docs/2.1.4.RELEASE/reference/htmlsingle/#common-application-properties
+#
+server:
+  port: 10896
+spring:
+  profiles:
+    active: dev
+  data:
+    rest:
+      basePath: /api
+  datasource:
+  #drop n create table again, good for testing, comment this in production
+  jpa:
+    show-sql: false
+  mail:
+    host: smtp.gmail.com
+    port: 587
+    username: nucleus.electrons@gmail.com
+    password: ncfonwnxrzqbydhe
+jwt:
+  secret: $4reEYR
+logging:
+  file: ./log/error.log
+  pattern:
+    file: "%d %-5level [%thread] %logger{0}: %msg%n"
+  level:
+    com.awesome.*: WARN
+
+#
+# doma-spring-boot properties.
+#
+# * How to configure
+# https://github.com/domaframework/doma-spring-boot/blob/master/README.md
+#
+doma:
+  dialect: postgres

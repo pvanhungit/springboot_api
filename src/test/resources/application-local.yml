@@ -1,0 +1,38 @@
+#
+# Spring Framework properties.
+#
+# How to configure
+# https://docs.spring.io/spring-boot/docs/2.1.4.RELEASE/reference/htmlsingle/#common-application-properties
+#
+server:
+  port: 8081
+spring:
+  profiles: local
+  test: local
+  mail:
+    host: 127.0.0.1
+    port: 1025
+    username: support@entropy_futbol.com
+jwt:
+  secret: linh
+logging:
+  file: ./log/debug.log
+  pattern:
+    console: "%d %-5level %logger: %msg%n"
+    file: "%d %-5level [%thread] %logger: %msg%n"
+  level:
+    com.awesome.*: DEBUG
+    root: DEBUG
+springdoc:
+  api-docs:
+    groups:
+      enabled: true
+
+#
+# doma-spring-boot properties.
+#
+# * How to configure
+# https://github.com/domaframework/doma-spring-boot/blob/master/README.md
+#
+doma:
+  dialect: postgres

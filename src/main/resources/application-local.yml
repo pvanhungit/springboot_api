@@ -1,0 +1,28 @@
+#
+# Spring Framework properties.
+#
+# How to configure
+# https://docs.spring.io/spring-boot/docs/2.1.4.RELEASE/reference/htmlsingle/#common-application-properties
+#
+server:
+  port: 8082
+spring:
+  profiles:
+    active: local
+auth0:
+  audience: http://localhost:8082/api
+logging:
+  file: ./log/error.log
+  pattern:
+    file: "%d %-5level [%thread] %logger{0}: %msg%n"
+  level:
+    com.awesome.*: WARN
+
+#
+# doma-spring-boot properties.
+#
+# * How to configure
+# https://github.com/domaframework/doma-spring-boot/blob/master/README.md
+#
+doma:
+  dialect: postgres
